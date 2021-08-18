@@ -28,3 +28,9 @@ tasks:
     deps: [ui-deps]
     cmds:
       - npm run dev
+
+  deploy:
+    deps: [build]
+    cmds:
+      - rm -rf node_modules/.cache/gh-pages
+      - npm run deploy
