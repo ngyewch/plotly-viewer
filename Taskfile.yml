@@ -1,0 +1,30 @@
+version: '3'
+
+tasks:
+  ui-deps:
+    cmds:
+      - npm install
+      - npm prune
+    sources:
+      - package.json
+    generates:
+      - package-lock.json
+
+  build:
+    deps: [ui-deps]
+    cmds:
+      - npm run build
+    sources:
+      - public/*
+      - src/**/*
+      - .env
+      - rollup.config.js
+    generates:
+      - public/build/bundle.css
+      - public/build/bundle.js
+      - public/build/bundle.js.map
+
+  run:
+    deps: [ui-deps]
+    cmds:
+      - npm run dev
