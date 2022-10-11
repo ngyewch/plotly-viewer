@@ -53,9 +53,6 @@ export default {
             dirs: ['public'],
             spa: 'public/index.html',
             port: 5000,
-            proxy: {
-                '/service/*': 'http://localhost:8080/service/',
-            },
         }),
 
         // Watch the `public` directory and refresh the
