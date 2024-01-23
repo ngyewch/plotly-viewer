@@ -1,36 +1,23 @@
 version: '3'
 
 tasks:
-  ui-deps:
+  install:
     cmds:
-      - npm install
-      - npm prune
-    sources:
-      - package.json
-    generates:
-      - package-lock.json
+      - pnpm install
+      - pnpm prune
 
   build:
-    deps: [ui-deps]
+    deps: [ install ]
     cmds:
-      - npm run build
-    sources:
-      - public/*
-      - src/**/*
-      - .env
-      - rollup.config.js
-    generates:
-      - public/build/bundle.css
-      - public/build/bundle.js
-      - public/build/bundle.js.map
+      - pnpm build
 
   run:
-    deps: [ui-deps]
+    deps: [ install ]
     cmds:
-      - npm run dev
+      - pnpm run dev
 
-  deploy:
-    deps: [build]
-    cmds:
-      - rm -rf node_modules/.cache/gh-pages
-      - npm run deploy
+  #deploy:
+  #  deps: [ build ]
+  #  cmds:
+  #    - rm -rf node_modules/.cache/gh-pages
+  #    - npm run deploy

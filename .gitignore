@@ -1,4 +1,4 @@
 .task/
-public/build/
+dist/
 node_modules/
 report.*.json
