@@ -1,20 +1,19 @@
-<script>
+<script lang="ts">
     import {HSplitPane} from 'svelte-split-pane';
     import Button, {Label} from '@smui/button';
     import {FlatToast, ToastContainer} from "svelte-toasts";
     import {onMount} from 'svelte';
-    import JSONEditor from 'jsoneditor';
+    import JSONEditor, {type ValidationError} from 'jsoneditor';
+    import Plotly from 'plotly.js';
 
-    const tabs = ['Plotly', 'JSON'];
-
-    let jsonEditorElement;
-    let jsonEditor;
+    let jsonEditorElement: HTMLElement;
+    let jsonEditor: JSONEditor | undefined;
 
     onMount(() => {
         jsonEditor = new JSONEditor(jsonEditorElement, {
             mode: 'code',
-            onValidate: function(json) {
-                plot();
+            onValidate: function (json: any): ValidationError[] | Promise<ValidationError[]> {
+                return doPlot(json);
             },
         });
     });
@@ -30,9 +29,18 @@
         if (!jsonEditor) {
             return;
         }
-        Plotly.newPlot('plotly-container', jsonEditor.get());
+        doPlot(jsonEditor.get());
     }
 
+    function doPlot(json: any): Promise<ValidationError[]> {
+        return Plotly.newPlot('plotly-container', json)
+            .then(() => [])
+            .catch(e =>
+                [{
+                    path: [0],
+                    message: e.toString(),
+                }]);
+    }
 </script>
 
 <style>
@@ -54,9 +62,6 @@
     .json-editor {
         width: 100%;
         height: 100%;
-    }
-
-    .plotly-container {
     }
 </style>
 

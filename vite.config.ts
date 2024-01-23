@@ -7,5 +7,17 @@ export default defineConfig({
     ],
     build: {
         sourcemap: true,
-    }
+    },
+    resolve: {
+        alias: {
+            stream: 'stream-browserify',
+        }
+    },
+    optimizeDeps: {
+        esbuildOptions: {
+            define: {
+                global: 'globalThis',
+            },
+        },
+    },
 });
