@@ -1,45 +1,34 @@
 <script lang="ts">
-    import {HSplitPane} from 'svelte-split-pane';
+    import {Pane, Splitpanes} from 'svelte-splitpanes';
     import Button, {Label} from '@smui/button';
-    import {FlatToast, ToastContainer} from "svelte-toasts";
-    import {onMount} from 'svelte';
-    import JSONEditor, {type ValidationError} from 'jsoneditor';
+    import toast, {Toaster} from 'svelte-5-french-toast';
     import Plotly from 'plotly.js';
+    import {JSONEditor} from 'svelte-jsoneditor';
 
-    let jsonEditorElement: HTMLElement;
-    let jsonEditor: JSONEditor | undefined;
-
-    onMount(() => {
-        jsonEditor = new JSONEditor(jsonEditorElement, {
-            mode: 'code',
-            onValidate: function (json: any): ValidationError[] | Promise<ValidationError[]> {
-                return doPlot(json);
-            },
-        });
-    });
-
-    function formatJson() {
-        if (!jsonEditor) {
-            return;
-        }
-        jsonEditor.setText(JSON.stringify(jsonEditor.get(), null, 2));
-    }
+    let content: any = {
+        json: {},
+    };
 
     function plot() {
-        if (!jsonEditor) {
-            return;
+        if ('json' in content) {
+            doPlot(content.json);
+        } else if ('text' in content) {
+            try {
+                doPlot(JSON.parse(content.text));
+            } catch (e) {
+                // do nothing
+            }
+        } else {
+            doPlot({});
         }
-        doPlot(jsonEditor.get());
     }
 
-    function doPlot(json: any): Promise<ValidationError[]> {
+    function doPlot(json: any) {
         return Plotly.newPlot('plotly-container', json)
             .then(() => [])
-            .catch(e =>
-                [{
-                    path: [0],
-                    message: e.toString(),
-                }]);
+            .catch(e => {
+                toast.error(`Invalid plot: ${e}`);
+            });
     }
 </script>
 
@@ -58,36 +47,24 @@
         border-top: solid 1px lightgray;
         flex-grow: 1;
     }
-
-    .json-editor {
-        width: 100%;
-        height: 100%;
-    }
 </style>
+
+<Toaster />
 
 <div class="main-container">
     <div class="toolbar">
-        <Button variant="raised" on:click={() => formatJson()}>
-            <Label>Format JSON</Label>
-        </Button>
-        <Button variant="raised" on:click={() => plot()}>
+        <Button variant="raised" onclick={() => plot()}>
             <Label>Plot</Label>
         </Button>
     </div>
     <div class="content">
-        <HSplitPane leftPaneSize="400px" minLeftPaneSize="250px">
-            <left slot="left">
-                <div bind:this={jsonEditorElement} id="json-editor" class="json-editor"></div>
-            </left>
-            <right slot="right">
-                <div id="plotly-container" class="plotly-container">
-
-                </div>
-            </right>
-        </HSplitPane>
+        <Splitpanes horizontal={false}>
+            <Pane minSize={25}>
+                <JSONEditor bind:content={content} />
+            </Pane>
+            <Pane>
+                <div id="plotly-container" class="plotly-container"></div>
+            </Pane>
+        </Splitpanes>
     </div>
-
-    <ToastContainer placement="bottom-center" theme="light" showProgress={true} let:data={data}>
-        <FlatToast {data}/>
-    </ToastContainer>
 </div>

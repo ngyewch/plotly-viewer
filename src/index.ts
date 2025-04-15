@@ -1,9 +1,9 @@
-import App from "./App.svelte";
-
 import 'svelte-material-ui/bare.css';
-import 'jsoneditor/dist/jsoneditor.css';
+import {mount} from 'svelte';
 
-let app = new App({
+import App from './App.svelte';
+
+const app = mount(App, {
     target: document.body,
 });
 
