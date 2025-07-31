@@ -21,3 +21,8 @@ tasks:
   #  cmds:
   #    - rm -rf node_modules/.cache/gh-pages
   #    - npm run deploy
+
+  outdated:
+    deps: [ install ]
+    cmds:
+      - pnpm outdated
