@@ -13,26 +13,26 @@
     "preview": "run-s build doPreview"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "5.0.3",
+    "@sveltejs/vite-plugin-svelte": "6.1.0",
     "@tsconfig/svelte": "5.0.4",
-    "@types/plotly.js": "3.0.0",
+    "@types/plotly.js": "3.0.3",
     "buffer": "6.0.3",
     "gh-pages": "6.3.0",
-    "cross-env": "7.0.3",
-    "npm-run-all2": "8.0.2",
+    "cross-env": "10.0.0",
+    "npm-run-all2": "8.0.4",
     "stream-browserify": "3.0.0",
-    "svelte-check": "4.2.1",
+    "svelte-check": "4.3.0",
     "typescript": "5.8.3",
-    "vite": "6.3.5"
+    "vite": "7.0.6"
   },
   "dependencies": {
-    "@smui/button": "8.0.0-beta.3",
-    "@smui/icon-button": "8.0.0-beta.3",
-    "plotly.js": "3.0.1",
-    "svelte": "5.31.1",
+    "@smui/button": "8.0.1",
+    "@smui/icon-button": "8.0.1",
+    "plotly.js": "3.0.3",
+    "svelte": "5.37.1",
     "svelte-5-french-toast": "2.0.4",
-    "svelte-jsoneditor": "3.3.1",
-    "svelte-material-ui": "8.0.0-beta.3",
+    "svelte-jsoneditor": "3.8.0",
+    "svelte-material-ui": "8.0.1",
     "svelte-splitpanes": "8.0.9"
   }
 }
