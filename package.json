@@ -13,26 +13,26 @@
     "preview": "run-s build doPreview"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "6.1.0",
-    "@tsconfig/svelte": "5.0.4",
-    "@types/plotly.js": "3.0.3",
+    "@sveltejs/vite-plugin-svelte": "6.2.1",
+    "@tsconfig/svelte": "5.0.6",
+    "@types/plotly.js": "3.0.8",
     "buffer": "6.0.3",
     "gh-pages": "6.3.0",
-    "cross-env": "10.0.0",
+    "cross-env": "10.1.0",
     "npm-run-all2": "8.0.4",
     "stream-browserify": "3.0.0",
-    "svelte-check": "4.3.0",
-    "typescript": "5.8.3",
-    "vite": "7.0.6"
+    "svelte-check": "4.3.4",
+    "typescript": "5.9.3",
+    "vite": "7.2.2"
   },
   "dependencies": {
-    "@smui/button": "8.0.1",
-    "@smui/icon-button": "8.0.1",
-    "plotly.js": "3.0.3",
-    "svelte": "5.37.1",
-    "svelte-5-french-toast": "2.0.4",
-    "svelte-jsoneditor": "3.8.0",
-    "svelte-material-ui": "8.0.1",
+    "@smui/button": "8.0.3",
+    "@smui/icon-button": "8.0.3",
+    "plotly.js": "3.3.0",
+    "svelte": "5.43.12",
+    "svelte-5-french-toast": "2.0.6",
+    "svelte-jsoneditor": "3.10.0",
+    "svelte-material-ui": "8.0.3",
     "svelte-splitpanes": "8.0.9"
   }
 }
