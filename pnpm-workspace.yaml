@@ -1,3 +1,6 @@
+allowBuilds:
+  '@parcel/watcher': false
+  es5-ext: false
 overrides:
   braces@<3.0.3: '>=3.0.3'
   es5-ext@>=0.10.0 <0.10.63: '>=0.10.63'
